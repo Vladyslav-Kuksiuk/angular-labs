@@ -1,36 +1,60 @@
 import {Component} from '@angular/core';
+
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  template: `
+      <p>Ім'я: {{name}}</p>
+      <p>Вік: {{age}}</p>
+      <input type="text" [value]="name"/>
+      <input type="text" [value]="age"/>
+
+      <br>
+
+      <table border="1">
+          <tr>
+              <td [attr.colspan]="colspan">One-Two</td>
+          </tr>
+          <tr>
+              <td>Three</td>
+              <td>Four</td>
+          </tr>
+          <tr>
+              <td>Five</td>
+              <td>Six</td>
+          </tr>
+      </table>
+
+      <br>
+
+      <p>Кількість кліків {{count}}</p>
+      <button (click)="increase()">Click</button>
+
+      <br>
+
+      <p>Кількість кліків {{count_2}}</p>
+      <button (click)="increase_2($event)">Click</button>
+
+      <br>
+
+      <p>Привіт {{name}}</p>
+      <input type="text" [(ngModel)]="name"/> <br><br>
+      <input type="text" [(ngModel)]="name"/>
+  `
 })
 export class AppComponent {
-  text: string = "";
-  price: number = 0;
+  name: string = "Tom";
+  age: number = 25;
+  colspan: number = 2;
+  count: number = 0;
+  count_2: number = 0;
 
-  items: Item[] =
-    [
-      {purchase: "Хліб", done: false, price: 15.9},
-      {purchase: "Вершкове масло", done: false, price: 60},
-      {purchase: "Картопля", done: true, price: 22.6},
-      {purchase: "Сир", done: false, price: 310}
-    ];
-
-  addItem(text: string, price: number): void {
-    if (text == null || text.trim() == "" || price == null) return;
-    this.items.push(new Item(text, price));
+  increase(): void {
+    this.count++;
   }
-}
 
-class Item {
-  purchase: string;
-  done: boolean;
-  price: number;
-
-  constructor(purchase: string, price: number) {
-
-    this.purchase = purchase;
-    this.price = price;
-    this.done = false;
+  increase_2($event: any): void {
+    this.count_2++;
+    console.log($event);
   }
 }
 
