@@ -3,58 +3,41 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-      <p>Ім'я: {{name}}</p>
-      <p>Вік: {{age}}</p>
-      <input type="text" [value]="name"/>
-      <input type="text" [value]="age"/>
+    <div [class.isRedBox]="isRed"></div>
+    <div [class.isRedBox]="!isRed"></div>
+    <input type="checkbox" [(ngModel)]="isRed"/>
 
-      <br>
+    <br>
 
-      <table border="1">
-          <tr>
-              <td [attr.colspan]="colspan">One-Two</td>
-          </tr>
-          <tr>
-              <td>Three</td>
-              <td>Four</td>
-          </tr>
-          <tr>
-              <td>Five</td>
-              <td>Six</td>
-          </tr>
-      </table>
+    <div [class]="blue"></div>
 
-      <br>
+    <br>
 
-      <p>Кількість кліків {{count}}</p>
-      <button (click)="increase()">Click</button>
+    <div [style.backgroundColor]="isYellow? 'yellow' : 'blue'"></div>
+    <div [style.background-color]="!isYellow ? 'yellow' : 'blue'"></div>
+    <input type="checkbox" [(ngModel)]="isYellow"/>
+  `,
+  styles: [`
+    div {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #ccc
+    }
 
-      <br>
+    .isRedBox {
+      background-color: red;
+    }
 
-      <p>Кількість кліків {{count_2}}</p>
-      <button (click)="increase_2($event)">Click</button>
-
-      <br>
-
-      <p>Привіт {{name}}</p>
-      <input type="text" [(ngModel)]="name"/> <br><br>
-      <input type="text" [(ngModel)]="name"/>
-  `
+    .isBlueBox {
+      background-color: blue;
+    }
+  `]
 })
 export class AppComponent {
-  name: string = "Tom";
-  age: number = 25;
-  colspan: number = 2;
-  count: number = 0;
-  count_2: number = 0;
+  isRed = false;
 
-  increase(): void {
-    this.count++;
-  }
+  blue = "isBlueBox"
 
-  increase_2($event: any): void {
-    this.count_2++;
-    console.log($event);
-  }
+  isYellow = false;
 }
 
